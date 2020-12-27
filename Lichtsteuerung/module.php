@@ -7,10 +7,12 @@
             // Diese Zeile nicht löschen.
             parent::Create();
 
-            $this->RegisterPropertyString("config_url", "https://publickitchenapi.casoapp.com/api/v1.0/Winecooler/SetLight");
-            $this->RegisterPropertyString("config_key", "apikey");
-            $this->RegisterPropertyString("config_dev", "device");
+            $this->RegisterPropertyString("CKA_config_url", "https://publickitchenapi.casoapp.com/api/v1.0/Winecooler/SetLight");
+            $this->RegisterPropertyString("CKA_config_key", "apikey");
+            $this->RegisterPropertyString("CKA_config_dev", "device");
 
+            $this->RegisterVariableBoolean("CKA_light_zone_1", "Beleuchtung Zone 1");
+            $this->RegisterVariableBoolean("CKA_light_zone_2", "Beleuchtung Zone 2");
         }
  
         // Überschreibt die intere IPS_ApplyChanges($id) Funktion
@@ -46,9 +48,9 @@
         public function light_raw($zone, $lightOn) {
 
 
-            $url = $this->ReadPropertyString("config_url");
-            $key = $this->ReadPropertyString("config_key");
-            $dev = $this->ReadPropertyString("config_dev");            
+            $url = $this->ReadPropertyString("CKA_config_url");
+            $key = $this->ReadPropertyString("CKA_config_key");
+            $dev = $this->ReadPropertyString("CKA_config_dev");            
 
             
             $data = array(
@@ -88,6 +90,24 @@
             }
 
             curl_close($curl);                                      // cURL Handle schliessen
+
+            if ($lightOn) == true {
+                $lightstate = "an";
+            } else {
+                $lightstate = "aus";
+            }
+            switch($zone){
+            case 0:
+                $this->SetValue("CKA_light_zone_1", lightstate);
+                $this->SetValue("CKA_light_zone_2", lightstate);
+                break;
+            case 1:
+                $this->SetValue("CKA_light_zone_1", lightstate);
+                break;
+            case 2:
+                $this->SetValue("CKA_light_zone_2", lightstate);
+                break;
+            }                        
         }
     }
 ?>
