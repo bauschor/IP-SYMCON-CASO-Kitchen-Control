@@ -1,0 +1,14 @@
+{
+    "id": "{56088A7F-9E3C-2AA1-61F1-7DCEA66D3DCB}",
+    "name": "Lichtsteuerung",
+    "type": 3,
+    "vendor": "CASO",
+    "aliases":
+    [
+        "WineChef Pro 40"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "CKA"
+}

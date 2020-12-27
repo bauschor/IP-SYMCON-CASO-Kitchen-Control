@@ -1,0 +1,14 @@
+{
+    "elements":
+    [
+        { "type": "ValidationTextBox", "name": "config_url", "caption": "CASO API URL" },
+        { "type": "ValidationTextBox", "name": "config_key", "caption": "CASO API KEY" },
+        { "type": "ValidationTextBox", "name": "config_dev", "caption": "CASO Device ID" }
+
+    ],
+    "actions":
+    [
+        { "type": "Button", "label": "Licht an", "onClick": "CKA_light($id, 0, true);" },
+        { "type": "Button", "label": "Licht aus", "onClick": "CKA_light($id, 0, false);" }
+    ],
+}
