@@ -63,7 +63,7 @@
                 "accept: */*",
                 "x-api-key: ".$key,
                 "Content-Type: application/json",
-                "Content-Length: ".strlen($post_data),
+                "Content-Length: ".strlen($post_data)
             );
             
             $curl = curl_init();                                    // cURLHandle generieren
