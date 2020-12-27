@@ -92,21 +92,16 @@
             curl_close($curl);                                      // cURL Handle schliessen
 
             
-            if ($lightOn == true) {
-                $lightstate = "an";
-            } else {
-                $lightstate = "aus";
-            }
             switch($zone){
             case 0:
-                $this->SetValue("CKA_light_zone_1", lightstate);
-                $this->SetValue("CKA_light_zone_2", lightstate);
+                $this->SetValue("CKA_light_zone_1", $lightOn);
+                $this->SetValue("CKA_light_zone_2", $lightOn);
                 break;
             case 1:
-                $this->SetValue("CKA_light_zone_1", lightstate);
+                $this->SetValue("CKA_light_zone_1", $lightOn);
                 break;
             case 2:
-                $this->SetValue("CKA_light_zone_2", lightstate);
+                $this->SetValue("CKA_light_zone_2", $lightOn);
                 break;
             }                        
         }
