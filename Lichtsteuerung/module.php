@@ -91,7 +91,8 @@
 
             curl_close($curl);                                      // cURL Handle schliessen
 
-            if ($lightOn) == true {
+            
+            if ($lightOn == true) {
                 $lightstate = "an";
             } else {
                 $lightstate = "aus";
