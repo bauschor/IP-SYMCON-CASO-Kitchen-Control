@@ -11,16 +11,21 @@
             $this->RegisterPropertyString("CKA_config_key", "apikey");
             $this->RegisterPropertyString("CKA_config_dev", "device");
 
-            $this->RegisterVariableBoolean("CKA_light_zone_1", "Beleuchtung Zone 1");
-            $this->RegisterVariableBoolean("CKA_light_zone_2", "Beleuchtung Zone 2");
+            $this->RegisterVariableBoolean("CKA_light_zone_0", "Steuerung aller Zonen", "~Switch");
+            $this->RegisterVariableBoolean("CKA_light_zone_1", "Beleuchtung Zone 1", "~Switch");
+            $this->RegisterVariableBoolean("CKA_light_zone_2", "Beleuchtung Zone 2", "~Switch");
 
+            $this->EnableAction("CKA_light_zone_0");
             $this->EnableAction("CKA_light_zone_1");
-            $this->EnableAction("CKA_light_zone_2");            
+            $this->EnableAction("CKA_light_zone_2");           
         }
 
 
         public function RequestAction($Ident, $Value) {
             switch($Ident){
+            case "CKA_light_zone_0":
+                $this->light_raw(0, $Value);
+                break;                
             case "CKA_light_zone_1":
                 $this->light_raw(1, $Value);
                 break;
