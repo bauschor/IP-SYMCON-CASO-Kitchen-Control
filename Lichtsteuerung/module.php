@@ -112,14 +112,23 @@
             
             switch($zone){
             case 0:
+                $this->SetValue("CKA_light_zone_0", $lightOn);
                 $this->SetValue("CKA_light_zone_1", $lightOn);
                 $this->SetValue("CKA_light_zone_2", $lightOn);
                 break;
             case 1:
                 $this->SetValue("CKA_light_zone_1", $lightOn);
+
+                if ($this->GetValue("CKA_light_zone_2") == $lightOn){
+                    $this->SetValue("CKA_light_zone_0", $lightOn);
+                }
                 break;
             case 2:
                 $this->SetValue("CKA_light_zone_2", $lightOn);
+
+                if ($this->GetValue("CKA_light_zone_1") == $lightOn){
+                    $this->SetValue("CKA_light_zone_0", $lightOn);
+                }
                 break;
             }                        
         }
