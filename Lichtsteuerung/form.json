@@ -8,7 +8,7 @@
     ],
     "actions":
     [
-        { "type": "Button", "label": "Licht an", "onClick": "CKA_light($id, 0, true);" },
-        { "type": "Button", "label": "Licht aus", "onClick": "CKA_light($id, 0, false);" }
+        { "type": "Button", "label": "Licht an", "onClick": "CKA_light_raw($id, 0, true);" },
+        { "type": "Button", "label": "Licht aus", "onClick": "CKA_light_raw($id, 0, false);" }
     ]
 }

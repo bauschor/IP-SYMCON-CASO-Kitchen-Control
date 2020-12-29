@@ -13,8 +13,23 @@
 
             $this->RegisterVariableBoolean("CKA_light_zone_1", "Beleuchtung Zone 1");
             $this->RegisterVariableBoolean("CKA_light_zone_2", "Beleuchtung Zone 2");
+
+            $this->EnableAction("CKA_light_zone_1");
+            $this->EnableAction("CKA_light_zone_2");            
         }
- 
+
+
+        public function RequestAction($Ident, $Value) {
+            switch($Ident){
+            case "CKA_light_zone_1":
+                $this->light_raw(1, $Value);
+                break;
+            case "CKA_light_zone_2":
+                $this->light_raw(2, $Value);
+                break;
+            }
+        }
+
         // Überschreibt die intere IPS_ApplyChanges($id) Funktion
         public function ApplyChanges() {
             // Diese Zeile nicht löschen
@@ -31,14 +46,12 @@
         */
 
         // -------------------------------------------------------------------------
-        public function light($zone, $light) {
+        public function light($zone, string $light) {
             switch($light){
         	case "on":
-            case true:
                 $this->light_raw($zone, true);
                 break;
             case "off":
-            case false:
                 $this->light_raw($zone, false);
 	        break;
 	       }
