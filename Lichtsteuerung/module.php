@@ -46,7 +46,8 @@
         * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
         * Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wiefolgt zur Verfügung gestellt:
         *
-        * CKA_light($id, $zone, $light);
+        * CKA_light($id, $zone, $light);            // (hier $light = "on" oder "off")
+        * CKA_light_raw($id, $zone, $light);        // (hier $light = true oder false)
         *
         */
 
@@ -61,6 +62,7 @@
 	        break;
 	       }
         }
+
 
         // -------------------------------------------------------------------------        
         public function light_raw($zone, $lightOn) {
@@ -110,24 +112,25 @@
             curl_close($curl);                                      // cURL Handle schliessen
 
             
-            switch($zone){
-            case 0:
+        // ----------------------------------------------------
+            switch($zone){                                                  // jetzt noch die entsprechenden Status Variablen in SYMCON setzen
+            case 0:                                                         // bei 0 (= alle Zonen schalten) ist es einfach
                 $this->SetValue("CKA_light_zone_0", $lightOn);
                 $this->SetValue("CKA_light_zone_1", $lightOn);
                 $this->SetValue("CKA_light_zone_2", $lightOn);
                 break;
             case 1:
-                $this->SetValue("CKA_light_zone_1", $lightOn);
+                $this->SetValue("CKA_light_zone_1", $lightOn);              // Zone 1 schalten
 
-                if ($this->GetValue("CKA_light_zone_2") == $lightOn){
-                    $this->SetValue("CKA_light_zone_0", $lightOn);
+                if ($this->GetValue("CKA_light_zone_2") == $lightOn){       // hat Zone 2 zufällig den gleichen Status?
+                    $this->SetValue("CKA_light_zone_0", $lightOn);          // Dann kann man auch den "für alle Zonen" Status gleich setzen
                 }
                 break;
             case 2:
                 $this->SetValue("CKA_light_zone_2", $lightOn);
 
-                if ($this->GetValue("CKA_light_zone_1") == $lightOn){
-                    $this->SetValue("CKA_light_zone_0", $lightOn);
+                if ($this->GetValue("CKA_light_zone_1") == $lightOn){       // hat Zone 1 zufällig den gleichen Status?
+                    $this->SetValue("CKA_light_zone_0", $lightOn);          // Dann kann man auch den "für alle Zonen" Status gleich setzen
                 }
                 break;
             }                        
